@@ -1,9 +1,10 @@
+const fetch = require('node-fetch');
 module.exports = async (url, opts) => {
     let retry = opts && opts.retry || 3
 
     while (retry > 0) {
         try {
-            return await import('node-fetch').then(({ default: fetch }) => fetch(url, opts))
+            return await fetch(url, opts)
         } catch(e) {
             if (opts && opts.callback) {
                 opts.callback(retry)
